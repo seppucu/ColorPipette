@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ColorPipette Import</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f4f1ea;
+        --panel: rgba(255, 252, 245, 0.96);
+        --border: #d9cfbf;
+        --text: #2d241b;
+        --muted: #756657;
+        --accent: #c46d2d;
+        --accent-strong: #9f5319;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Inter, "Segoe UI", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top right, rgba(196, 109, 45, 0.18), transparent 34%),
+          radial-gradient(circle at bottom left, rgba(227, 192, 156, 0.32), transparent 36%),
+          var(--bg);
+      }
+
+      .shell {
+        min-height: 100vh;
+        padding: 18px;
+      }
+
+      .panel {
+        display: grid;
+        gap: 14px;
+        padding: 18px;
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        background: var(--panel);
+        box-shadow: 0 18px 36px rgba(79, 54, 28, 0.1);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 22px;
+        line-height: 1.1;
+      }
+
+      p {
+        margin: 0;
+        font-size: 13px;
+        line-height: 1.5;
+        color: var(--muted);
+      }
+
+      textarea {
+        width: 100%;
+        min-height: 250px;
+        resize: vertical;
+        padding: 14px;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        font: 12px/1.5 "SFMono-Regular", Consolas, monospace;
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.82);
+      }
+
+      textarea:focus,
+      button:focus {
+        outline: 2px solid rgba(196, 109, 45, 0.28);
+        outline-offset: 2px;
+      }
+
+      .actions {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+      }
+
+      button {
+        border: 0;
+        border-radius: 999px;
+        padding: 12px 16px;
+        font: 600 13px/1 Inter, "Segoe UI", sans-serif;
+        cursor: pointer;
+      }
+
+      .primary {
+        color: #fffaf5;
+        background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      }
+
+      .ghost {
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.75);
+        border: 1px solid var(--border);
+      }
+
+      .status {
+        min-height: 18px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .status.error {
+        color: #a93f2c;
+      }
+
+      .status.success {
+        color: #2b7a4b;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="panel">
+        <div>
+          <h1>ColorPipette Import</h1>
+          <p>Paste the JSON copied from the Chrome extension. The plugin will create local color styles and a palette board on the canvas.</p>
+        </div>
+
+        <textarea id="payload" spellcheck="false" placeholder='Paste JSON from "Export to Figma" here'></textarea>
+
+        <div class="actions">
+          <button id="pasteButton" class="ghost" type="button">Paste clipboard</button>
+          <button id="importButton" class="primary" type="button">Import colors</button>
+        </div>
+
+        <div id="status" class="status" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <script>
+      const payload = document.getElementById("payload");
+      const pasteButton = document.getElementById("pasteButton");
+      const importButton = document.getElementById("importButton");
+      const status = document.getElementById("status");
+
+      function setStatus(message, type) {
+        status.textContent = message;
+        status.className = `status${type ? ` ${type}` : ""}`;
+      }
+
+      pasteButton.addEventListener("click", async () => {
+        try {
+          const text = await navigator.clipboard.readText();
+          payload.value = text;
+          setStatus("Clipboard pasted. Ready to import.");
+        } catch (error) {
+          setStatus("Clipboard is unavailable. Paste the JSON manually.", "error");
+        }
+      });
+
+      importButton.addEventListener("click", () => {
+        if (!payload.value.trim()) {
+          setStatus("Paste ColorPipette JSON first.", "error");
+          return;
+        }
+
+        setStatus("Importing colors into Figma...");
+        parent.postMessage(
+          {
+            pluginMessage: {
+              type: "IMPORT_COLORS",
+              payload: payload.value
+            }
+          },
+          "*"
+        );
+      });
+
+      window.onmessage = (event) => {
+        const message = event.data.pluginMessage;
+
+        if (message && message.type === "IMPORT_RESULT") {
+          setStatus(message.message, message.ok ? "success" : "error");
+        }
+      };
+    </script>
+  </body>
+</html>

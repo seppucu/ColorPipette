@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "ColorPipette",
+  "version": "1.0.0",
+  "description": "Extract a clean color palette from the current page and pick exact colors from any pixel.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "tabs"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "ColorPipette",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icons/image.png",
+    "32": "icons/image.png",
+    "48": "icons/image.png",
+    "128": "icons/image.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

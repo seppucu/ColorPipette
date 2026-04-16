@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ColorPipette</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="popup">
+      <section class="hero">
+        <p class="eyebrow">Chrome Extension</p>
+        <h1>ColorPipette</h1>
+        <p class="subtitle">
+          Palette is scanned automatically when you open the popup. Copy exact colors or export the current set for Figma.
+        </p>
+      </section>
+
+      <section class="controls">
+        <button id="figmaExportButton" class="primary-button" type="button">Export to Figma</button>
+        <button id="pickerButton" class="secondary-button" type="button">Color picker</button>
+      </section>
+
+      <section class="status-bar">
+        <span id="statusText">Open the popup to scan the current tab automatically.</span>
+      </section>
+
+      <section class="palette-section">
+        <div class="section-head">
+          <h2>Palette</h2>
+          <span id="paletteCount">0 colors</span>
+        </div>
+        <div id="palette" class="palette-grid" aria-live="polite"></div>
+      </section>
+
+      <template id="colorCardTemplate">
+        <button class="color-card" type="button">
+          <span class="swatch"></span>
+          <span class="color-meta">
+            <span class="color-hex"></span>
+            <span class="color-role"></span>
+          </span>
+          <span class="copy-hint">Click to copy</span>
+        </button>
+      </template>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

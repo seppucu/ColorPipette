@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ColorPipette</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="#hero">
+          <img src="./logo.png" alt="ColorPipette logo" />
+          <span>ColorPipette</span>
+        </a>
+
+        <nav class="nav">
+          <a href="#features">Features</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#figma">Figma</a>
+        </nav>
+      </header>
+
+      <main>
+        <section id="hero" class="hero">
+          <div class="hero-copy reveal">
+            <p class="eyebrow">Chrome Extension + Figma Plugin</p>
+            <h1>Turn any website into a reusable color system.</h1>
+            <p class="lede">
+              ColorPipette scans page colors automatically, lets you pick exact tones from the interface,
+              and sends the palette into Figma so inspiration becomes usable styles in seconds.
+            </p>
+
+            <div class="hero-actions">
+              <a class="button button-primary" href="#features">See features</a>
+              <a class="button button-secondary" href="#figma">Explore Figma flow</a>
+            </div>
+
+            <ul class="hero-notes">
+              <li>Automatic page palette detection</li>
+              <li>On-page color picker</li>
+              <li>JSON export for Figma import</li>
+            </ul>
+          </div>
+
+          <div class="hero-visual reveal">
+            <div class="orb orb-peach"></div>
+            <div class="orb orb-rose"></div>
+            <div class="orb orb-gold"></div>
+
+            <section class="mockup extension-card">
+              <div class="mockup-head">
+                <div>
+                  <span class="label">Extension</span>
+                  <h2>Palette from a live page</h2>
+                </div>
+                <span class="pill">Auto scan</span>
+              </div>
+
+              <div class="palette-list">
+                <button class="palette-item" type="button">
+                  <span class="swatch" style="--swatch:#F7B4A8"></span>
+                  <span>
+                    <strong>#F7B4A8</strong>
+                    <small>Background - 84 matches</small>
+                  </span>
+                </button>
+                <button class="palette-item" type="button">
+                  <span class="swatch" style="--swatch:#BB5D7A"></span>
+                  <span>
+                    <strong>#BB5D7A</strong>
+                    <small>Text - 53 matches</small>
+                  </span>
+                </button>
+                <button class="palette-item" type="button">
+                  <span class="swatch" style="--swatch:#33233A"></span>
+                  <span>
+                    <strong>#33233A</strong>
+                    <small>Border - 32 matches</small>
+                  </span>
+                </button>
+                <button class="palette-item" type="button">
+                  <span class="swatch" style="--swatch:#F0DCCB"></span>
+                  <span>
+                    <strong>#F0DCCB</strong>
+                    <small>Background - 29 matches</small>
+                  </span>
+                </button>
+              </div>
+
+              <div class="mini-toolbar">
+                <span class="toolbar-tag">Export to Figma</span>
+                <span class="toolbar-tag toolbar-tag-soft">Color picker</span>
+              </div>
+            </section>
+
+            <section class="mockup figma-card">
+              <div class="mockup-head">
+                <div>
+                  <span class="label">Figma Plugin</span>
+                  <h2>Imported as styles</h2>
+                </div>
+                <span class="pill pill-dark">Local styles</span>
+              </div>
+
+              <div class="figma-grid">
+                <article class="figma-token">
+                  <span class="token-chip" style="--swatch:#F7B4A8"></span>
+                  <div>
+                    <strong>ColorPipette/Background/1</strong>
+                    <small>Palette / Boutique editorial</small>
+                  </div>
+                </article>
+                <article class="figma-token">
+                  <span class="token-chip" style="--swatch:#BB5D7A"></span>
+                  <div>
+                    <strong>ColorPipette/Text/2</strong>
+                    <small>Role: Text</small>
+                  </div>
+                </article>
+                <article class="figma-token">
+                  <span class="token-chip" style="--swatch:#33233A"></span>
+                  <div>
+                    <strong>ColorPipette/Border/3</strong>
+                    <small>Role: Border</small>
+                  </div>
+                </article>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section id="features" class="section section-grid">
+          <div class="section-title reveal">
+            <p class="eyebrow">Why it feels useful</p>
+            <h2>From inspiration to implementation without losing the mood.</h2>
+          </div>
+
+          <div class="feature-grid">
+            <article class="feature-card reveal">
+              <span class="feature-number">01</span>
+              <h3>Automatic palette scan</h3>
+              <p>
+                Open the popup and the current page is analyzed immediately. No extra clicks just to get the
+                main visual rhythm of the site.
+              </p>
+            </article>
+
+            <article class="feature-card reveal">
+              <span class="feature-number">02</span>
+              <h3>Precise color picker</h3>
+              <p>
+                Need the exact tone of a button, border, label or card background? Pick a visible element and
+                copy the color instantly.
+              </p>
+            </article>
+
+            <article class="feature-card reveal">
+              <span class="feature-number">03</span>
+              <h3>Figma-ready export</h3>
+              <p>
+                The extension copies a structured palette payload, and the plugin turns it into styles and a
+                clean palette board inside your file.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section id="workflow" class="section workflow">
+          <div class="section-title reveal">
+            <p class="eyebrow">Workflow</p>
+            <h2>A compact loop for designers who collect colors from the wild.</h2>
+          </div>
+
+          <div class="steps">
+            <article class="step reveal">
+              <span class="step-index">Step 1</span>
+              <h3>Open any website</h3>
+              <p>Use the extension popup to capture the dominant palette from the current page automatically.</p>
+            </article>
+
+            <article class="step reveal">
+              <span class="step-index">Step 2</span>
+              <h3>Export palette JSON</h3>
+              <p>One click copies a structured palette package that keeps color names, roles and page metadata.</p>
+            </article>
+
+            <article class="step reveal">
+              <span class="step-index">Step 3</span>
+              <h3>Import in Figma</h3>
+              <p>The plugin creates local color styles and a visual board so the palette is reusable immediately.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="figma" class="section figma-section">
+          <div class="section-title reveal">
+            <p class="eyebrow">Figma Integration</p>
+            <h2>The plugin turns copied colors into something your file can actually use.</h2>
+          </div>
+
+          <div class="comparison reveal">
+            <div class="comparison-panel">
+              <span class="label">Before</span>
+              <h3>Loose inspiration</h3>
+              <p>
+                Screenshot folders, copied hex codes in notes, random swatches, and no easy way to keep context
+                about where the palette came from.
+              </p>
+            </div>
+
+            <div class="comparison-panel accent">
+              <span class="label">After</span>
+              <h3>Reusable color styles</h3>
+              <p>
+                Named styles, source metadata, grouped color roles, and a palette board that can live next to
+                your moodboard or design system work.
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
