@@ -1,0 +1,2 @@
+# ColorPipette
+Chrome extension
